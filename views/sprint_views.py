@@ -9,7 +9,7 @@ class SprintViews:
         return user_input
 
     @staticmethod
-    def print_backlog(tasks):
+    def print_sprint(tasks):
         console = Console()
 
         table = Table(show_header=True, header_style="bold blue")
@@ -31,7 +31,7 @@ class SprintViews:
         items =  [f"{index + 1} : {item.title}" for index, item in enumerate(tasks)]
         terminal_menu = TerminalMenu(items, accept_keys=("enter", "alt-d", "ctrl-i"))
         menu_entry_index = terminal_menu.show()
-        return tasks[menu_entry_index].id
+        return tasks[menu_entry_index].id, tasks[menu_entry_index]
 
     @staticmethod
     def get_task_from_backlog(backlog):

@@ -4,6 +4,7 @@ from utils import menus
 from views.menu_views import MenuViews
 from views.sprints_views import SprintsViews
 from models.sprint import Sprint
+from controllers.sprint_controller import SprintController
 
 
 class SprintsController:
@@ -53,6 +54,8 @@ class SprintsController:
 
     def _run_sprint_controller(self):
         number = self._select_sprint()
+        sprint_controller = SprintController(number)
+        sprint_controller.run()
 
 
     def _select_sprint(self):
