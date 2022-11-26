@@ -2,6 +2,7 @@ from rich.console import Console
 from rich.table import Table
 from simple_term_menu import TerminalMenu
 
+
 class BacklogViews:
     @staticmethod
     def get_text(user_question):
@@ -22,15 +23,22 @@ class BacklogViews:
 
         for item in backlog:
             task = item.task
-            table.add_row(str(task.id), task.title, task.description, str(task.data_added),
-                str(task.data_completed), task.status)
+            table.add_row(
+                str(task.id),
+                task.title,
+                task.description,
+                str(task.data_added),
+                str(task.data_completed),
+                task.status,
+            )
 
         console.print(table)
 
     @staticmethod
     def get_task_to_update(backlog):
-        items =  [f"{index + 1} : {item.task.title}" for index, item in enumerate(backlog)]
+        items = [
+            f"{index + 1} : {item.task.title}" for index, item in enumerate(backlog)
+        ]
         terminal_menu = TerminalMenu(items, accept_keys=("enter", "alt-d", "ctrl-i"))
         menu_entry_index = terminal_menu.show()
         return backlog[menu_entry_index].task.id
-

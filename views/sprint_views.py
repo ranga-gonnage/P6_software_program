@@ -2,6 +2,7 @@ from rich.console import Console
 from rich.table import Table
 from simple_term_menu import TerminalMenu
 
+
 class SprintViews:
     @staticmethod
     def get_text(user_question):
@@ -21,21 +22,29 @@ class SprintViews:
         table.add_column("status", min_width=12, justify="right")
 
         for task in tasks:
-            table.add_row(str(task.id), task.title, task.description, str(task.data_added),
-                str(task.data_completed), task.status)
+            table.add_row(
+                str(task.id),
+                task.title,
+                task.description,
+                str(task.data_added),
+                str(task.data_completed),
+                task.status,
+            )
 
         console.print(table)
 
     @staticmethod
     def get_task_to_update(tasks):
-        items =  [f"{index + 1} : {item.title}" for index, item in enumerate(tasks)]
+        items = [f"{index + 1} : {item.title}" for index, item in enumerate(tasks)]
         terminal_menu = TerminalMenu(items, accept_keys=("enter", "alt-d", "ctrl-i"))
         menu_entry_index = terminal_menu.show()
         return tasks[menu_entry_index].id, tasks[menu_entry_index]
 
     @staticmethod
     def get_task_from_backlog(backlog):
-        items =  [f"{index + 1} : {item.task.title}" for index, item in enumerate(backlog)]
+        items = [
+            f"{index + 1} : {item.task.title}" for index, item in enumerate(backlog)
+        ]
         terminal_menu = TerminalMenu(items, accept_keys=("enter", "alt-d", "ctrl-i"))
         menu_entry_index = terminal_menu.show()
         return backlog[menu_entry_index].task.id

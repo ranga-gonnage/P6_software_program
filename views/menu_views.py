@@ -1,5 +1,6 @@
 from simple_term_menu import TerminalMenu
 
+
 class MenuViews:
     @staticmethod
     def display_main_menu(items):

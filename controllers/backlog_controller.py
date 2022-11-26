@@ -40,7 +40,7 @@ class BacklogController:
     def _update_task(self):
         backlog = Backlog.select()
         task_id_to_update = BacklogViews.get_task_to_update(backlog)
-        task_to_update = Task.get(Task.id==task_id_to_update)
+        task_to_update = Task.get(Task.id == task_id_to_update)
         task_to_update.title = self._get_text_input("Title of the task")
         task_to_update.description = self._get_text_input("Description of the task")
         task_to_update.data_added = self._get_date_input("Date added")
@@ -70,11 +70,7 @@ class BacklogController:
 
     def _is_date_valid(self, date_text):
         try:
-            datetime.datetime.strptime(date_text, '%Y-%m-%d')
+            datetime.datetime.strptime(date_text, "%Y-%m-%d")
         except ValueError:
             return False
         return True
-
-
-
-

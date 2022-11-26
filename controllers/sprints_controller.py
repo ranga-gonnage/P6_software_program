@@ -40,7 +40,7 @@ class SprintsController:
     def _update_sprint(self):
         sprints = Sprint.select()
         sprint_id_to_update = SprintsViews.get_sprints_to_update(sprints)
-        sprint_to_update = Sprint.get(Sprint.id==sprint_id_to_update)
+        sprint_to_update = Sprint.get(Sprint.id == sprint_id_to_update)
         sprint_to_update.number = self._get_number_input("Number")
         sprint_to_update.data_start = self._get_date_input("Date start")
         sprint_to_update.data_end = self._get_date_input("Date end")
@@ -49,7 +49,7 @@ class SprintsController:
     def _delete_sprint(self):
         sprints = Sprint.select()
         sprint_id_to_update = SprintsViews.get_sprints_to_update(sprints)
-        sprint_to_update = Sprint.get(Sprint.id==sprint_id_to_update)
+        sprint_to_update = Sprint.get(Sprint.id == sprint_id_to_update)
         sprint_to_update.delete_instance()
 
     def _run_sprint_controller(self):
@@ -57,11 +57,10 @@ class SprintsController:
         sprint_controller = SprintController(number)
         sprint_controller.run()
 
-
     def _select_sprint(self):
         sprints = Sprint.select()
         sprint_id_to_update = SprintsViews.get_sprints_to_update(sprints)
-        sprint_to_update = Sprint.get(Sprint.id==sprint_id_to_update)
+        sprint_to_update = Sprint.get(Sprint.id == sprint_id_to_update)
         return sprint_to_update.number
 
     def _get_number_input(self, user_question):
@@ -78,7 +77,7 @@ class SprintsController:
 
     def _is_date_valid(self, date_text):
         try:
-            datetime.datetime.strptime(date_text, '%Y-%m-%d')
+            datetime.datetime.strptime(date_text, "%Y-%m-%d")
         except ValueError:
             return False
         return True

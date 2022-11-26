@@ -2,6 +2,7 @@ from rich.console import Console
 from rich.table import Table
 from simple_term_menu import TerminalMenu
 
+
 class SprintsViews:
     @staticmethod
     def get_text(user_question):
@@ -19,13 +20,15 @@ class SprintsViews:
         table.add_column("Date end", min_width=12, justify="right")
 
         for item in sprints:
-            table.add_row(str(item.id), str(item.number), str(item.data_start), str(item.data_end))
+            table.add_row(
+                str(item.id), str(item.number), str(item.data_start), str(item.data_end)
+            )
 
         console.print(table)
 
     @staticmethod
     def get_sprints_to_update(sprints):
-        items =  [f"{index + 1} : {item.number}" for index, item in enumerate(sprints)]
+        items = [f"{index + 1} : {item.number}" for index, item in enumerate(sprints)]
         terminal_menu = TerminalMenu(items, accept_keys=("enter", "alt-d", "ctrl-i"))
         menu_entry_index = terminal_menu.show()
         return sprints[menu_entry_index].id

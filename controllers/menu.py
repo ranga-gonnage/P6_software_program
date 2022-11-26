@@ -19,9 +19,6 @@ class Menu:
             if user_choice == 0:
                 self.backlog_controller.run()
             elif user_choice == 1:
-                self.sprints_controller.run() 
+                self.sprints_controller.run()
             else:
                 print("Thank you ! Good bye !")
-
-
-

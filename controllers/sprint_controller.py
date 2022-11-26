@@ -29,15 +29,19 @@ class SprintController:
                 self._delete_task()
 
     def _view_sprint(self):
-        sprint_tasks = SprintTask.select().where(SprintTask.sprint==self._get_sprint())
+        sprint_tasks = SprintTask.select().where(
+            SprintTask.sprint == self._get_sprint()
+        )
         tasks = [task.task for task in sprint_tasks]
         SprintViews.print_sprint(tasks)
 
     def _update_task(self):
-        sprint_tasks = SprintTask.select().where(SprintTask.sprint==self._get_sprint())
+        sprint_tasks = SprintTask.select().where(
+            SprintTask.sprint == self._get_sprint()
+        )
         tasks = [task.task for task in sprint_tasks]
         task_id_to_update = SprintViews.get_task_to_update(tasks)
-        task_to_update = Task.get(Task.id==task_id_to_update)
+        task_to_update = Task.get(Task.id == task_id_to_update)
         task_to_update.title = self._get_text_input("Title of the task")
         task_to_update.description = self._get_text_input("Description of the task")
         task_to_update.data_added = self._get_date_input("Date added")
@@ -46,26 +50,27 @@ class SprintController:
         task_to_update.save()
 
     def _delete_task(self):
-        sprint_tasks = SprintTask.select().where(SprintTask.sprint==self._get_sprint())
+        sprint_tasks = SprintTask.select().where(
+            SprintTask.sprint == self._get_sprint()
+        )
         tasks = [task.task for task in sprint_tasks]
         task_id_to_update, task_to_update = SprintViews.get_task_to_update(tasks)
-        sprint_tasks = SprintTask.get(SprintTask.task==task_to_update)
+        sprint_tasks = SprintTask.get(SprintTask.task == task_to_update)
         sprint_tasks.delete_instance()
-        task = Task.get(Task.id==task_id_to_update)
+        task = Task.get(Task.id == task_id_to_update)
         task.delete_instance()
 
     def _add_task_from_backlog(self):
         backlog = Backlog.select()
         task_id_to_add = SprintViews.get_task_from_backlog(backlog)
-        task_to_add = Task.get(Task.id==task_id_to_add)
+        task_to_add = Task.get(Task.id == task_id_to_add)
         sprint = SprintTask.create(sprint=self._get_sprint(), task=task_to_add)
         sprint.save()
         backlog_item_to_delete = Backlog.get(Backlog.task == task_id_to_add)
         backlog_item_to_delete.delete_instance()
 
-
     def _get_sprint(self):
-        return Sprint.get(Sprint.number==self.number)
+        return Sprint.get(Sprint.number == self.number)
 
     def _get_text_input(self, user_question):
         user_input = ""
@@ -81,7 +86,7 @@ class SprintController:
 
     def _is_date_valid(self, date_text):
         try:
-            datetime.datetime.strptime(date_text, '%Y-%m-%d')
+            datetime.datetime.strptime(date_text, "%Y-%m-%d")
         except ValueError:
             return False
         return True
