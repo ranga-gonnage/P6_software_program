@@ -6,11 +6,17 @@ from simple_term_menu import TerminalMenu
 class SprintViews:
     @staticmethod
     def get_text(user_question):
+        """
+            complexity : O(1)
+        """
         user_input = input(f"{user_question} : ")
         return user_input
 
     @staticmethod
     def print_sprint(tasks):
+        """
+            complexity : O(n)
+        """
         console = Console()
 
         table = Table(show_header=True, header_style="bold blue")
@@ -35,6 +41,9 @@ class SprintViews:
 
     @staticmethod
     def get_task_to_update(tasks):
+        """
+            complexity : O(n)
+        """
         items = [f"{index + 1} : {item.title}" for index, item in enumerate(tasks)]
         terminal_menu = TerminalMenu(items, accept_keys=("enter", "alt-d", "ctrl-i"))
         menu_entry_index = terminal_menu.show()
@@ -42,6 +51,9 @@ class SprintViews:
 
     @staticmethod
     def get_task_from_backlog(backlog):
+        """
+            complexity : O(n)
+        """
         items = [
             f"{index + 1} : {item.task.title}" for index, item in enumerate(backlog)
         ]

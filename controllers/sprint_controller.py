@@ -16,6 +16,9 @@ class SprintController:
         self._menu()
 
     def _menu(self):
+        """
+            complexity : O(1)
+        """
         user_choice = None
         while user_choice != 4:
             user_choice = MenuViews.display_main_menu(menus.sprint_menu)
@@ -29,6 +32,9 @@ class SprintController:
                 self._delete_task()
 
     def _view_sprint(self):
+        """
+            complexity : O(2n)
+        """
         sprint_tasks = SprintTask.select().where(
             SprintTask.sprint == self._get_sprint()
         )
@@ -36,6 +42,9 @@ class SprintController:
         SprintViews.print_sprint(tasks)
 
     def _update_task(self):
+        """
+            complexity : O(2n)
+        """
         sprint_tasks = SprintTask.select().where(
             SprintTask.sprint == self._get_sprint()
         )
@@ -50,6 +59,9 @@ class SprintController:
         task_to_update.save()
 
     def _delete_task(self):
+        """
+            complexity : O(2n)
+        """
         sprint_tasks = SprintTask.select().where(
             SprintTask.sprint == self._get_sprint()
         )
@@ -61,6 +73,9 @@ class SprintController:
         task.delete_instance()
 
     def _add_task_from_backlog(self):
+        """
+            complexity : O(1)
+        """
         backlog = Backlog.select()
         task_id_to_add = SprintViews.get_task_from_backlog(backlog)
         task_to_add = Task.get(Task.id == task_id_to_add)
@@ -70,21 +85,35 @@ class SprintController:
         backlog_item_to_delete.delete_instance()
 
     def _get_sprint(self):
+        """
+            complexity : O(n)
+        """
         return Sprint.get(Sprint.number == self.number)
 
     def _get_text_input(self, user_question):
+        """
+            complexity : O(n)
+            n the number of wrong user typing
+        """
         user_input = ""
         while not user_input.isalpha():
             user_input = SprintViews.get_text(user_question)
         return user_input
 
     def _get_date_input(self, user_question):
+        """
+            complexity : O(n)
+            n the number of wrong user typing
+        """
         user_input = ""
         while not self._is_date_valid(user_input):
             user_input = SprintViews.get_text(user_question)
         return user_input
 
     def _is_date_valid(self, date_text):
+        """
+            complexity : O(1)
+        """
         try:
             datetime.datetime.strptime(date_text, "%Y-%m-%d")
         except ValueError:

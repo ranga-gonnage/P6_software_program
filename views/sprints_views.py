@@ -11,6 +11,9 @@ class SprintsViews:
 
     @staticmethod
     def print_sprints(sprints):
+        """
+            complexity : O(n)
+        """
         console = Console()
 
         table = Table(show_header=True, header_style="bold blue")
@@ -28,6 +31,9 @@ class SprintsViews:
 
     @staticmethod
     def get_sprints_to_update(sprints):
+        """
+            complexity : O(n)
+        """
         items = [f"{index + 1} : {item.number}" for index, item in enumerate(sprints)]
         terminal_menu = TerminalMenu(items, accept_keys=("enter", "alt-d", "ctrl-i"))
         menu_entry_index = terminal_menu.show()
