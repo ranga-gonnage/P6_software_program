@@ -18,8 +18,8 @@ This CLI application allow the owner to manage a team using the agile methodolog
 #### Windows : `env\Scripts\activate`
 
 ## Run
-Create the database : `python create_tables.py`
-Command to run the script : `python main.py`
+* Create the database : `python create_tables.py`
+* Command to run the script : `python main.py`
 
 ## Author
 Ranga Gonnage
